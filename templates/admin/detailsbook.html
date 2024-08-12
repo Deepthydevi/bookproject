@@ -1,0 +1,23 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<h1>Book Details</h1>
+<div class="card" style="width: 16rem;">
+  <img src="{{ book.image.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ book.title }}</h5>
+    <p class="card-text">Written By {{ book.author }}</p>
+      <p class="card-text">Book Price: {{ book.price }}</p>
+
+  </div>
+</div>
+
+<div class="button">
+ <a href="{% url 'booklist' %}" class="btn btn-dark" style="width:100px;margin-left:50px;" >Back</a>
+    </div>
+
+
+{% endblock %}

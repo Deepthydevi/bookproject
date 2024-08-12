@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block content %}
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+         <th>Title</th>
+         <th>Author</th>
+         <th>Price</th>
+         <th colspan="3">Actions</th>
+    </tr>
+</thead>
+  <tbody>
+  {% if books %}
+   {% for i in books %}
+     <tr>
+         <td>{{ i.title }}</td>
+         <td>{{ i.author }}</td>
+         <td>{{ i.price }}</td>
+         <td>
+            <a href="{% url 'update' i.id %}" class="btn btn-success">Edit</a>
+             <a href="{% url 'details' i.id %}" class="btn btn-primary">Details</a>
+             <a href="{% url 'delete' i.id %}" class="btn btn-danger">Delete</a>
+         </td>
+
+
+ </tr>
+  {% endfor %}
+  {% endif %}
+  </tbody>
+
+</table>
+<div class="button">
+ <a href="{% url 'booklist' %}" class="btn btn-dark" style="width:100px;margin-left:50px;" >Back</a>
+    </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">{% if page.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo</span>
+      </a>
+    </li>
+      {% endif %}
+      {% for num in page.paginator.page_range %}
+    <li class="page-item {% if page.number == num %}activate{% endif %}">
+        <a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+
+        {% endfor %}
+      {% if page.has_next %}
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page.next_page.number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+      {% endif %}
+  </ul>
+</nav>
+
+
+
+{% endblock %}
